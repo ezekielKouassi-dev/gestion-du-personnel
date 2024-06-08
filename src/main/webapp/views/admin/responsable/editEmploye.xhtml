@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<ui:composition template="/resources/tpl/admin.xhtml">
+	<ui:define name="title">
+		<title>Modifier un employé</title>
+	</ui:define>
+	<ui:define name="main">
+
+		<style type="text/css">
+			.centered-form {
+				display: flex;
+				justify-content: center;
+				margin-left: auto;
+			}
+		</style>
+
+		<div class="centered-form">
+			<p:outputPanel id="container" styleClass="container">
+				<h:form id="updateForm">
+					<p:panel header="Modifier un employé">
+						<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+						<h:panelGrid id="grid" cellpadding="7" columns="4" styleClass="mb-4"
+									 style="padding-top: 5px ; font-size: 18px">
+
+							<h:outputLabel value="Login:"/>
+							<p:inputText value="#{employeController.selectedEmploye.login}"/>
+
+							<h:outputLabel value="Mot de passe:"/>
+							<p:inputText value="#{employeController.selectedEmploye.password}"/>
+
+							<h:outputLabel value="Nom:"/>
+							<p:inputText value="#{employeController.selectedEmploye.nom}"/>
+
+							<h:outputLabel value="Prenoms:"/>
+							<p:inputText value="#{employeController.selectedEmploye.prenom}"/>
+
+							<h:outputLabel value="Adresse:"/>
+							<p:inputText value="#{employeController.selectedEmploye.adresse}"/>
+
+							<h:outputLabel value="Poste:"/>
+							<p:inputText value="#{employeController.selectedEmploye.poste}"/>
+
+							<h:outputLabel value="N° de Téléphone:"/>
+							<p:inputText value="#{employeController.selectedEmploye.numero}"/>
+
+							<h:outputLabel value="Email:"/>
+							<p:inputText value="#{employeController.selectedEmploye.email}"/>
+
+							<h:outputLabel value="Salaire:"/>
+							<p:inputText value="#{employeController.selectedEmploye.salaire}"/>
+
+						</h:panelGrid>
+						<p:commandButton value="Modifier" action="#{employeController.updateEmploye}" process="@form"
+										 update="messages" ajax="false" style="width: 100%"/>
+					</p:panel>
+				</h:form>
+			</p:outputPanel>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
+
