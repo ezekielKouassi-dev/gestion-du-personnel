@@ -22,7 +22,6 @@ public class EmployeController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-
 	@Inject
 	private EmployeService employeService;
 	@Inject
@@ -58,16 +57,13 @@ public class EmployeController implements Serializable {
 	}
 
 	public Responsable getLoggedInResponsable() {
-		Long userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userId");
-		String userRole = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("role");
-		System.out.println("Récupération de l'utilisateur connecté. ID: " + userId + ", Role: " + userRole);
+		String login = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
 
-		if (userId != null && "RESPONSABLE".equals(userRole)) {
-			return responsableService.findById(userId);
+		if (login != null) {
+			return responsableService.recupererParLogin(login);
 		}
 		return null;
 	}
-
 
 	@Transactional
 	public void updateEmploye() throws IOException {
@@ -92,7 +88,6 @@ public class EmployeController implements Serializable {
 		}
 	}
 
-
 	public void deleteEmploye() {
 		if (selectedEmploye != null && selectedEmploye.getId() != null) {
 			employeService.deleteEmploye(selectedEmploye.getId());
@@ -108,7 +103,6 @@ public class EmployeController implements Serializable {
 		List<Employe> allEmployees = employeService.getAllEmployes();
 		return allEmployees != null ? allEmployees.size() : 0;
 	}
-
 
 	// Getters and Setters
 	public List<Employe> getEmployes() {

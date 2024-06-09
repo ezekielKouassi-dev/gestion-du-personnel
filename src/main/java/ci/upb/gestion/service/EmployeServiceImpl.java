@@ -19,7 +19,7 @@ public class EmployeServiceImpl implements EmployeService {
 		return em.createQuery("SELECT e FROM Employe e", Employe.class).getResultList();
 	}
 
-	public Employe findByUsername(String login) {
+	public Employe recupererParLogin(String login) {
 		try {
 			return em.createQuery("SELECT e FROM Employe e WHERE e.login = :login", Employe.class).setParameter("login", login).getSingleResult();
 		} catch (Exception e) {
@@ -35,7 +35,17 @@ public class EmployeServiceImpl implements EmployeService {
 	@Transactional
 	@Override
 	public void addEmploye(Employe employe) {
-		em.persist(employe);
+		Employe employeAvecLoginDejaExistant = null;
+		try {
+			employeAvecLoginDejaExistant = recupererParLogin(employe.getLogin());
+			if (employeAvecLoginDejaExistant == null) {
+				em.persist(employe);
+			} else {
+				throw new Exception("Le login existe déjà");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Transactional

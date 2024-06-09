@@ -57,7 +57,7 @@ public class CongeController implements Serializable {
 				String employeeName = employe.getNom();
 				String leaveStartDate = newConge.getDateDebut().toString();
 				String leaveEndDate = newConge.getDateFin().toString();
-				// congeService.sendLeaveRequestNotificationToManager(managerEmail, employeeName, leaveStartDate, leaveEndDate);
+				// congeService.envoyerNotificationManager(managerEmail, employeeName, leaveStartDate, leaveEndDate);
 			}
 
 			return "success";

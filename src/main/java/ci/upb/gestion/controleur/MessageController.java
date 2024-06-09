@@ -93,12 +93,10 @@ public class MessageController implements Serializable {
 	}
 
 	public Responsable getLoggedInResponsable() {
-		Long userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userId");
-		String userRole = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("role");
-		System.out.println("Récupération de l'utilisateur connecté. ID: " + userId + ", Role: " + userRole);
+		String login = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
 
-		if (userId != null && "RESPONSABLE".equals(userRole)) {
-			return responsableService.findByEmail(userRole);
+		if (login != null) {
+			return responsableService.recupererParLogin(login);
 		}
 		return null;
 	}

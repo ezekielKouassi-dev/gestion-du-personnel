@@ -80,7 +80,7 @@ public class CongeService {
 		em.merge(conge);
 	}
 
-	public void sendLeaveRequestNotificationToManager(String managerEmail, String employeeName, String leaveStartDate, String leaveEndDate) {
+	public void envoyerNotificationManager(String managerEmail, String employeeName, String leaveStartDate, String leaveEndDate) {
 		String subject = "Nouvelle demande de congé de " + employeeName;
 		String content = "L'employé " + employeeName + " a demandé un congé du " + leaveStartDate + " au " + leaveEndDate + ".";
 		emailService.sendEmail(managerEmail, subject, content);

@@ -9,22 +9,16 @@
 <ui:composition template="/resources/tpl/adminEmploye.xhtml">
 
 	<ui:define name="title">
-		<title>Historique des demandes de congé </title>
+		<title>Historique des demandes de congé</title>
 	</ui:define>
 	<ui:define name="main">
-
 		<p:outputPanel id="container" styleClass="container">
-
-			<div class="title">
-				Historique des demandes de congé
-			</div>
-
 			<h:form id="congeListForm">
-				<p:panel header="Liste des Demandes de Congé">
+				<p:panel header="Liste des Congés">
 					<p:dataTable id="congeTable" value="#{congeController.employeeConges}" var="conge" rows="10"
 								 paginator="true">
 						<p:column headerText="Employé">
-							<h:outputText value="#{conge.employe.nom}"/>
+							<h:outputText value="#{conge.employe.nom} #{conge.employe.prenom}"/>
 						</p:column>
 						<p:column headerText="Date de Début">
 							<h:outputText value="#{conge.dateDebut.toString()}">
@@ -38,13 +32,12 @@
 							<h:outputText value="#{conge.motif}"/>
 						</p:column>
 						<p:column headerText="Statut">
-							<h:outputText value="#{conge.statut}"
-										  style="#{conge.statut eq 'Rejeté' ? ' background-color:#df535385; font-size: 16px' : (conge.statut eq 'Approuvé' ? 'background-color:#1882ffd4;  font-size: 16px' : 'background-color:rgb(226 220 200);  font-size: 16px')}"/>
+							<h:outputText value="#{conge.statut == 'EN_ATTENTE' ? 'en attente' : conge.statut}"
+										  style="#{conge.statut eq 'Rejeté' ? 'color:#df535385; font-size: 16px' : (conge.statut eq 'Approuvé' ? 'color:#1882ffd4;  font-size: 16px' : 'color:rgb(226 220 200);  font-size: 16px')}"/>
 						</p:column>
 					</p:dataTable>
 				</p:panel>
 			</h:form>
-
 		</p:outputPanel>
 	</ui:define>
 </ui:composition>

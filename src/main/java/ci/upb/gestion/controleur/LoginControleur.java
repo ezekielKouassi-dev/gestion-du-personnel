@@ -63,7 +63,7 @@ public class LoginControleur implements Serializable {
 		// Vérifier les informations de connexion pour les responsables
 		List<Responsable> responsables = responsableService.findAll();
 		for (Responsable responsable : responsables) {
-			if (responsable.getNom().equals(username) && responsable.getPassword().equals(password)) {
+			if (responsable.getLogin().equals(username) && responsable.getPassword().equals(password)) {
 				role = "RESPONSABLE";
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("username", username);
 				return "/views/admin/index.xhtml?faces-redirect=true";

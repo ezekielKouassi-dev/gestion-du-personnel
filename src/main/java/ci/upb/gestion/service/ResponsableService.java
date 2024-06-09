@@ -39,4 +39,18 @@ public class ResponsableService {
 			return null;
 		}
 	}
+
+	public Responsable recupererParLogin(String login) {
+		Responsable responsable = null;
+		try {
+			responsable = em.createQuery(
+							"SELECT r FROM Responsable r WHERE r.login = ?1",
+							Responsable.class
+					).setParameter(1, login)
+					.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return responsable;
+	}
 }
